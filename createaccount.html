@@ -1,33 +1,38 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Form Validation</title>
+    <meta charset="utf-8">
     <style>
-        body { 
-            font-family: sans-serif; 
-            padding: 20px; 
+        body {
+            font-family: sans-serif;
+            padding: 20px;
             max-width: 400px;
             margin: 0 auto;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-image: url(image/tt.avif);
+            color: white;
+            box-sizing: border-box;
         }
-        
+
         h1 {
-            color:white
-            text-align:center;
+            color: white;
+            text-align: center;
         }
-        
+
         label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
-            color: white
+            color: white;
         }
-        
-        input { 
-            padding: 10px; 
-            margin-bottom: 15px; 
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
             display: block;
             width: 100%;
             border: 2px solid #ddd;
@@ -35,29 +40,29 @@
             box-sizing: border-box;
             font-size: 14px;
         }
-        
+
         input:focus {
             outline: none;
             border-color: #007bff;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
-        
-        button { 
-            padding: 12px 20px; 
-            background: #007bff; 
-            color: white; 
-            border: none; 
+
+        button {
+            padding: 12px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
             width: 100%;
             font-weight: bold;
         }
-        
-        button:hover { 
+
+        button:hover {
             background: #0056b3;
         }
-        
+
         #messageArea {
             font-weight: bold;
             margin-top: 15px;
@@ -68,67 +73,78 @@
         }
     </style>
 </head>
-<style>
- body{
-  background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-    background-image: url(image/tt.avif);
- }   
-</style>
 <body>
 
     <h1>CREATE NEW ACCOUNT</h1>
 
-    <label>FIRST NAME:</label>
-    <input type="text" id="firstnamebox" placeholder="Enter your fist name">
-     <label>LAST NAME:</label>
+    <label for="firstnamebox">FIRST NAME:</label>
+    <input type="text" id="firstnamebox" placeholder="Enter your first name">
+
+    <label for="lastnamebox">LAST NAME:</label>
     <input type="text" id="lastnamebox" placeholder="Enter your last name">
- <label>USERNAME</label>
- <input type="text" id="usernamebox" placeholder="enter your username">
- <label>E-MAIL ADRESS</label>
-<input type="text" id="e-mailadressbox" placeholder="enter your e-mail adress">
-<label>PASSWORD:</label>
+
+    <label for="usernameBox">USERNAME</label>
+    <input type="text" id="usernameBox" placeholder="Enter your username">
+
+    <label for="emailbox">E-MAIL ADDRESS</label>
+    <input type="email" id="emailbox" placeholder="Enter your e-mail address">
+
+    <label for="passwordBox">PASSWORD:</label>
     <input type="password" id="passwordBox" placeholder="Enter your password">
- <label>CHECK PASSWORD:</label>
-    <input type="password" id="passwordBox" placeholder="check your password">
+
+    <label for="passwordCheckBox">CHECK PASSWORD:</label>
+    <input type="password" id="passwordCheckBox" placeholder="Check your password">
 
     <p id="messageArea"></p>
-<a href="home.html">
-    <button onclick="signup()">CREATE</button>
-</a>
+
+    <!-- Button will run signup(); on success the script will navigate to home.html -->
+    <button id="createBtn" type="button" onclick="signup()">CREATE</button>
+
     <script>
         function signup() {
-            // 1. INPUT: Get what the user typed
-            let user = document.getElementById("usernameBox").value;
-            let pass = document.getElementById("passwordBox").value;
-            let msg = document.getElementById("messageArea");
+            // get values
+            const user = document.getElementById("usernameBox").value.trim();
+            const pass = document.getElementById("passwordBox").value;
+            const passCheck = document.getElementById("passwordCheckBox").value;
+            const msg = document.getElementById("messageArea");
 
-            // 2. LOGIC: Check the rules
+            // simple validation
             if (user === "") {
                 msg.innerHTML = "❌ Error: Username is required.";
                 msg.style.color = "red";
                 msg.style.backgroundColor = "#ffebee";
-            } 
-            else if (pass === "") {
+                return;
+            }
+            if (pass === "") {
                 msg.innerHTML = "❌ Error: Password is required.";
                 msg.style.color = "red";
                 msg.style.backgroundColor = "#ffebee";
+                return;
             }
-            else if (pass.length < 5) {
+            if (pass.length < 5) {
                 msg.innerHTML = "❌ Error: Password must be at least 5 characters!";
                 msg.style.color = "red";
                 msg.style.backgroundColor = "#ffebee";
-            } 
-            else {
-                msg.innerHTML = "✅ Success! Welcome, " + user + "!";
-                msg.style.color = "white";
-                msg.style.backgroundColor = "#28a745";
+                return;
             }
+            if (pass !== passCheck) {
+                msg.innerHTML = "❌ Error: Passwords do not match!";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+                return;
+            }
+
+            // success: show message then go to home.html
+            msg.innerHTML = "✅ Success! Redirecting to home...";
+            msg.style.color = "white";
+            msg.style.backgroundColor = "#28a745";
+
+            // short delay so user sees success message
+            setTimeout(function() {
+                window.location.href = "home.html";
+            }, 700);
         }
     </script>
 
 </body>
-
 </html>
