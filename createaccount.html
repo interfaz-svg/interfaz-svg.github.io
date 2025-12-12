@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            padding: 20px; 
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color:white
+            text-align:center;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white
+        }
+        
+        input { 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            display: block;
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        button { 
+            padding: 12px 20px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        button:hover { 
+            background: #0056b3;
+        }
+        
+        #messageArea {
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<style>
+ body{
+  background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-image: url(image/tt.avif);
+ }   
+</style>
+<body>
+
+    <h1>CREATE NEW ACCOUNT</h1>
+
+    <label>FIRST NAME:</label>
+    <input type="text" id="firstnamebox" placeholder="Enter your fist name">
+     <label>LAST NAME:</label>
+    <input type="text" id="lastnamebox" placeholder="Enter your last name">
+ <label>USERNAME</label>
+ <input type="text" id="usernamebox" placeholder="enter your username">
+ <label>E-MAIL ADRESS</label>
+<input type="text" id="e-mailadressbox" placeholder="enter your e-mail adress">
+<label>PASSWORD:</label>
+    <input type="password" id="passwordBox" placeholder="Enter your password">
+ <label>CHECK PASSWORD:</label>
+    <input type="password" id="passwordBox" placeholder="check your password">
+
+    <p id="messageArea"></p>
+
+    <button onclick="signup()">CREATE</button>
+
+    <script>
+        function signup() {
+            // 1. INPUT: Get what the user typed
+            let user = document.getElementById("usernameBox").value;
+            let pass = document.getElementById("passwordBox").value;
+            let msg = document.getElementById("messageArea");
+
+            // 2. LOGIC: Check the rules
+            if (user === "") {
+                msg.innerHTML = "❌ Error: Username is required.";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+            } 
+            else if (pass === "") {
+                msg.innerHTML = "❌ Error: Password is required.";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+            }
+            else if (pass.length < 5) {
+                msg.innerHTML = "❌ Error: Password must be at least 5 characters!";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+            } 
+            else {
+                msg.innerHTML = "✅ Success! Welcome, " + user + "!";
+                msg.style.color = "white";
+                msg.style.backgroundColor = "#28a745";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            padding: 20px; 
+            max-width: 400px;
+            margin: 0 auto;
+            background-image: url(image/u.avif);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input { 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            display: block;
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        button { 
+            padding: 12px 20px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        button:hover { 
+            background: #0056b3;
+        }
+        
+        #messageArea {
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>LOGIN</h1>
+
+    <label>Username:</label>
+    <input type="text" id="usernameBox" placeholder="Enter your username">
+
+    <label>Password:</label>
+    <input type="password" id="passwordBox" placeholder="Enter your password">
+
+    <p id="messageArea"></p>
+
+    <button onclick="checkLogin()">LOGIN</button>
+
+    <script>
+        function checkLogin() {
+            // 1. INPUT: Get what the user typed
+            let user = document.getElementById("usernameBox").value;
+            let pass = document.getElementById("passwordBox").value;
+            let msg = document.getElementById("messageArea");
+
+            // 2. LOGIC: Check the rules
+            if (user === "") {
+                msg.innerHTML = "❌ Error: Username is required.";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+            } 
+            else if (pass === "") {
+                msg.innerHTML = "❌ Error: Password is required.";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+            }
+            else if (pass.length < 5) {
+                msg.innerHTML = "❌ Error: Password must be at least 5 characters!";
+                msg.style.color = "red";
+                msg.style.backgroundColor = "#ffebee";
+            } 
+            else {
+                msg.innerHTML = "✅ Success! Welcome, " + user + "!";
+                msg.style.color = "white";
+                msg.style.backgroundColor = "#28a745";
+            }
+        }
+    </script>
+
+</body>
+</html>
